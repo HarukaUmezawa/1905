@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import java.util.concurrent.Future;
 
 public class ParallelProcessMain {
 	// 処理対象の数
@@ -23,28 +23,26 @@ public class ParallelProcessMain {
 	        long startTime = System.currentTimeMillis();
 
 	        // 処理結果受け取り用のリストを作成
-	        List<String> resultList = new ArrayList<>();
+	        List<Future> resultList = new ArrayList<>();
 
 //	       try {
 	        	// 処理対象をサブ処理１～３に渡して処理実行
 	        	for(int i=0 ; i<p ; i++){
-	        		ParallelProcessSub1 sub1 = new ParallelProcessSub1(proc.get(i));
-
-	        		resultList.add(ThreadPool.submit(sub1).process());
+	        		ThreadPool.submit(new ParallelProcessSub1(proc.get(i)));
+	        		resultList.add(****);  // ここにprocess()を入れたい
 	        		System.out.println(proc.get(i) + "実行済み");
 	        	}
 
 /**
- * 	Future<String> future
  *
 	        }catch(ExecutionException e) {
 	            e.printStackTrace();
 	        }
 
 	        // 実行結果を取得する
-	        for(String result : resultList){
+	        for(Future result : resultList){
 	            try{
-	                System.out.println(result);
+	                System.out.println(result.get());
 	            }catch(Exception e){
 	                e.printStackTrace();
 	            }
