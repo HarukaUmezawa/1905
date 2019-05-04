@@ -20,6 +20,11 @@ public class ParallelProcessSub3 implements ProcessSub{
     @Override
     public String call() throws Exception {
         // TODO 自動生成されたメソッド・スタブ
-        return null;
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return this.procName + "-" +this.result;
     }
 }
